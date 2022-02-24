@@ -44,16 +44,16 @@ let joinPageWebcam = document.getElementById("joinCam");
 let meetingCode = "";
 let screenShareOn = false;
 
-navigator.mediaDevices
-  .getUserMedia({
-    video: true,
-    audio: false,
-  })
-  .then((stream) => {
-    // console.log(stream);
-    joinPageWebcam.srcObject = stream;
-    joinPageWebcam.play();
-  });
+// navigator.mediaDevices
+//   .getUserMedia({
+//     video: false,
+//     audio: false,
+//   })
+//   .then((stream) => {
+//     // console.log(stream);
+//     joinPageWebcam.srcObject = stream;
+//     joinPageWebcam.play();
+//   });
 
 async function tokenGeneration() {
   if (TOKEN != "") {
@@ -355,6 +355,16 @@ function startMeeting(token, meetingId, name) {
 // joinMeeting();
 async function joinMeeting(newMeeting) {
   tokenGeneration();
+  navigator.mediaDevices
+    .getUserMedia({
+      video: true,
+      audio: false,
+    })
+    .then((stream) => {
+      // console.log(stream);
+      joinPageWebcam.srcObject = stream;
+      joinPageWebcam.play();
+    });
   let joinMeetingName =
     document.getElementById("joinMeetingName").value || "JSSDK";
   let meetingId = document.getElementById("joinMeetingId").value || "";
